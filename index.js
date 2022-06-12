@@ -16,25 +16,30 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-/*
-app.get('/', function (req, res) {
-    Usuario.find({}).exec(function (err, docs) {
-        res.render('index.ejs', { Usuarios: docs });
-    })
 
-})
 
-app.post('/', function (req, res) {
-    Usuario.find({ nome: new RegExp(req.body.txtPesquisa, 'gi') }).exec(function (err, docs) {
-        res.render('index.ejs', { Usuarios: docs });
-    })
-})
-*/
 
 app.get('/', function (req, res) {
     res.render('login.ejs');
 })
 
+//cadastrando email e senha banco
+app.post('/', function (req, res) {
+    var login = new Login({
+        email: req.body.iptEmail,
+        password: req.body.iptSenha
+    })
+
+    login.save(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/add');
+        }
+    })
+})
+
+/*
 app.get('/', async() => {
     const { email, senha } = req.body;
     const user = await Login.findOne({ email }).select('+senha');
@@ -45,27 +50,7 @@ app.get('/', async() => {
         }
 })
 
-
-
-/*
-app.post('/', function (req, res) {
-    var login = new Login({
-        email: req.body.iptEmail,
-        password: req.body.iptSenha
-    })
-    /*
-    const { email, senha } = req.body;
-    const user = await Login.findOne({ email }).select('+senha');
-   
-    login.save(function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/add');
-        }
-    })
-})
- */
+*/
 
 app.get('/add', function (req, res) {
     res.render('index.ejs');
@@ -82,7 +67,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/');
+            res.redirect('/add');
         }
     })
 })

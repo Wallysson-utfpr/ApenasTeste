@@ -1,5 +1,4 @@
 
-/*
 var conexao = require('../config/conexao');
 
 var LoginSchema = conexao.Schema({
@@ -8,4 +7,3 @@ var LoginSchema = conexao.Schema({
 })
 
 module.exports = conexao.model("Login", LoginSchema);
-*/
