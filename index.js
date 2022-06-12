@@ -17,12 +17,11 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 
-
-
 app.get('/', function (req, res) {
     res.render('login.ejs');
 })
 
+/*
 //cadastrando email e senha banco
 app.post('/', function (req, res) {
     var login = new Login({
@@ -39,18 +38,16 @@ app.post('/', function (req, res) {
     })
 })
 
-/*
-app.get('/', async() => {
-    const { email, senha } = req.body;
-    const user = await Login.findOne({ email }).select('+senha');
-    if (err) {
-            console.log(err);
-        } else {
-            res.redirect('/add');
-        }
-})
-
 */
+app.post('/authenticate', (req, res) => {
+    const { iptEmail, iptSenha } = req.body;
+    Login.findOne({ iptEmail })
+    .then((data) => {
+        if (data.email == iptEmail && data.password == iptSenha) res.redirect('/add')
+        else res.redirect('/?=SenhaIncorreta')
+    })
+    
+})
 
 app.get('/add', function (req, res) {
     res.render('index.ejs');
