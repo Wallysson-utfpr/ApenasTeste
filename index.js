@@ -3,7 +3,7 @@ const app = express();
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
-var Usuario = require('./model/usuario');
+var Moeda = require('./model/moeda');
 var Login = require('./model/login');
 var upload = require('./config/configMulter');
 
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 })
 
 /*
-//cadastrando email e senha banco
+//cadastro email e senha banco para testar
 app.post('/', function (req, res) {
     var login = new Login({
         email: req.body.iptEmail,
@@ -37,7 +37,6 @@ app.post('/', function (req, res) {
         }
     })
 })
-
 */
 app.post('/authenticate', (req, res) => {
     const { iptEmail, iptSenha } = req.body;
@@ -54,13 +53,13 @@ app.get('/add', function (req, res) {
 })
 
 app.post('/add', upload.single("txtFoto"), function (req, res) {
-    var usuario = new Usuario({
+    var money = new Moeda({
         nome: req.body.txtNome,
         alta: req.body.txtAlta,
         baixa: req.body.txtBaixa,
         foto: req.file.filename
     })
-    usuario.save(function (err) {
+    money.save(function (err) {
         if (err) {
             console.log(err);
         } else {
