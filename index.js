@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
@@ -12,13 +11,6 @@ app.use(cookieParser());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(session ({
-    secret: 'Super secret session key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false}
-}));
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -45,21 +37,18 @@ app.post('/', function (req, res) {
     })
 })
 */
+
 app.post('/authenticate', (req, res) => {
     const { iptEmail, iptSenha } = req.body;
     Login.findOne({ iptEmail })
     .then((data) => {
         if (data.email == iptEmail && data.password == iptSenha)  {
-            res.cookie(email === iptEmail)
             res.redirect('/add')
         } else { 
-            res.status(403)
-            res.write("Nao passou")
             res.redirect('/?=SenhaIncorreta') 
         }
     })
 })
-
 
 app.get('/add', function (req, res) {
     res.render('index.ejs');
