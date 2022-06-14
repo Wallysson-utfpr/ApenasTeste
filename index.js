@@ -70,6 +70,46 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
     })
 })
 
+function validateAuthToken(req, res, next) {
+    console.log('Auth Token');
+    const { authorization } = req.headers;
+    if(authorization && authorization === '123') {
+        next();
+    } else {
+        res.status(403).send({msg: 'Credenciais incorretas'})
+    }
+}
+
+app.post('/posts', validateAuthToken, (req, res) => {
+    req.cookies;
+    const post = req.body;
+    posts.push(post);
+    res.status(201).send(post);
+})
+
+function validateCookie( req, res, next) {
+    const { cookies} = req;
+    if('session_id' in cookies) {
+        console.log('Id de sessão ja existe');
+        if( cookies.session_id === '123456') {
+            next();
+        } else {
+            res.status(403).send({ msg: 'Não autenticado'});
+        }
+    } else {
+        res.status(403).send({ msg: 'Não autenticado'});
+    }
+}
+
+app.get('/signin', (req, res) => {
+    res.cookie('session_id', '123456');
+    res.status(200).json({msg: 'Logado'});
+})
+
+app.get('/protecao', validateCookie, (req, res) => {
+    res.status(200).json({msg: 'Autorizado'});
+})
+
 app.listen(3000, function () {
     console.log("Conexão inicializada.");
 })
