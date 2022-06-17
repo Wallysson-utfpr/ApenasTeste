@@ -20,9 +20,11 @@ app.get('/', function (req, res) {
     res.render('login.ejs');
 })
 
-/*
-//cadastro email e senha banco para testar
-app.post('/', function (req, res) {
+app.get('/cadastrar', function (req, res) {
+    res.render('cadastro.ejs');
+})
+
+app.post('/cadastrar', function (req, res) {
     var login = new Login({
         email: req.body.iptEmail,
         password: req.body.iptSenha
@@ -32,14 +34,15 @@ app.post('/', function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/add');
+            res.redirect('/');
         }
     })
 })
-*/
+
 
 app.post('/authenticate', (req, res) => {
     const { iptEmail, iptSenha } = req.body;
+    
     Login.findOne({ iptEmail })
     .then((data) => {
         if (data.email == iptEmail && data.password == iptSenha)  {
@@ -70,6 +73,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
     })
 })
 
+/*
 function validateAuthToken(req, res, next) {
     console.log('Auth Token');
     const { authorization } = req.headers;
@@ -109,7 +113,7 @@ app.get('/signin', (req, res) => {
 app.get('/protecao', validateCookie, (req, res) => {
     res.status(200).json({msg: 'Autorizado'});
 })
-
+*/
 app.listen(3000, function () {
     console.log("Conexão inicializada.");
 })

@@ -6,5 +6,4 @@ const uri = "mongodb://localhost:27017/dadosapi";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 module.exports = mongoose;
 
-
-module.exports = mongoose; 
+ 
