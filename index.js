@@ -115,7 +115,7 @@ app.get('/protecao', validateCookie, (req, res) => {
     res.status(200).json({msg: 'Autorizado'});
 })
 */
-app.listen(3000, function () {
+app.listen(porta, function () {
     console.log("Conexão inicializada.");
 })
 
