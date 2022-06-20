@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
@@ -114,7 +115,7 @@ app.get('/protecao', validateCookie, (req, res) => {
     res.status(200).json({msg: 'Autorizado'});
 })
 */
-app.listen(3000, function () {
+app.listen(porta, function () {
     console.log("Conexão inicializada.");
 })
 
