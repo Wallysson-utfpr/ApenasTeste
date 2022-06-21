@@ -1,16 +1,19 @@
 // midleware para upload das imagens
 
 const multer = require('multer');
-const path = require('path');
 
 var storage = multer.diskStorage({
-    destination: path.resolve(__dirname,'..','..','uploads'),
-        filename: (req, file, cb) => {
-            const ext = path.extname(file.originalname);
-            const name = path.basename(file.originalname);
+    filename: function (req, file, callback) {
+        let nomeArq = Date.now() + "-" + file.originalname;
+        callback(null, nomeArq);
 
-            cb(null,`${name}-${Date.now()}${ext}`);
-        }
+    },
+
+    destination: function (req, file, callback) {
+        let path = "public/fotos";
+        callback(null, path);
+
+    }
 })
 
 var upload = multer({ storage });
