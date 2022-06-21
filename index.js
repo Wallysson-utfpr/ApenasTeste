@@ -70,7 +70,7 @@ app.post('/authenticate', async (req, res) => {
             user: newUser,
             token: accessToken
         })
-        // return res.redirect('/add') If voce quiser redirecionar o usuario, basta substituir o return para o novo de abaixo
+        return res.redirect('/add') // If voce quiser redirecionar o usuario, basta substituir o return para o novo de abaixo
         
     } catch (error) {
         if(error) {
