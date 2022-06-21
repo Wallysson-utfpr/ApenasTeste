@@ -2,7 +2,7 @@ require('./environment')
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
-const porta = process.env.porta || 3000;
+//const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
@@ -100,8 +100,8 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
     })
 })
 
-
-app.listen(porta, function () {
+let port = process.env.PORT || 3000;
+app.listen(port, function () {
     console.log("Conexão inicializada.");
 })
 
