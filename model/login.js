@@ -9,7 +9,7 @@ var LoginSchema = conexao.Schema({
         required: [true, 'E-mail é obrigatorio']
     },
     password : {
-        type: Number,
+        type: String,
         required: [true, 'senha é obrigatoria'],
         max:  20,
         min:  5
