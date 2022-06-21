@@ -62,6 +62,9 @@ app.post('/authenticate', async (req, res) => {
             email: data.email
 
         }
+
+            return res.redirect('/add')
+
         // o token esta aqui accessToken | voce precisa pegalo e colocalo no localstorage
         // se exist um token no localstorage, entao voce redireciona o usuario para a pagina, se nao, nao faz nada
         if(accessToken) return res.status(200).json({
@@ -69,8 +72,9 @@ app.post('/authenticate', async (req, res) => {
             message: 'Is Authenticated',
             user: newUser,
             token: accessToken
+            
         })
-        return res.redirect('/add') // If voce quiser redirecionar o usuario, basta substituir o return para o novo de abaixo
+         // If voce quiser redirecionar o usuario, basta substituir o return para o novo de abaixo
         
     } catch (error) {
         if(error) {
