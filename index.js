@@ -29,7 +29,7 @@ app.get('/cadastrar', function (req, res) {
 
 app.post('/cadastrar', function (req, res) {
 
-    console.log('requestttttt#####',req.body)
+    //console.log('requestttttt#####', req.body)
     var login = new Login({
         email: req.body.iptEmail,
         password: req.body.iptSenha
@@ -49,36 +49,33 @@ app.post('/authenticate', async (req, res) => {
 
     try {
         const { iptEmail, iptSenha } = req.body;
-        const data = await Login.findOne({email: iptEmail})
+        const data = await Login.findOne({ email: iptEmail, password: iptSenha })
 
         const seed = 'token-seed-development' // assinatura do token
         const EXPIRES = '1h' // tempo que esse token ira expirar
         const accessToken = jwt.sign({
             id: data._id
-        }, seed, { expiresIn: EXPIRES} )
-        	
+        }, seed, { expiresIn: EXPIRES })
+
         const newUser = {
             id: data._id,
             email: data.email
 
         }
 
-            return res.redirect('/add')
+        return res.redirect('/add')
 
-        // o token esta aqui accessToken | voce precisa pegalo e colocalo no localstorage
-        // se exist um token no localstorage, entao voce redireciona o usuario para a pagina, se nao, nao faz nada
-        if(accessToken) return res.status(200).json({
-            ok: true, 
+        if (accessToken) return res.status(200).json({
+            ok: true,
             message: 'Is Authenticated',
             user: newUser,
             token: accessToken
-            
+
         })
-         // If voce quiser redirecionar o usuario, basta substituir o return para o novo de abaixo
-        
+
     } catch (error) {
-        if(error) {
-            return res.redirect('/?=SenhaIncorreta') 
+        if (error) {
+            return res.redirect('/?=SenhaIncorreta')
         }
     }
 
