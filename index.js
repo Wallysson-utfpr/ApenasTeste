@@ -1,7 +1,10 @@
+// 
+// 
 require('./environment')
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
+// a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
