@@ -1,3 +1,4 @@
+//
 var conexao = require('../config/conexao');
 
 var MoedaSchema = conexao.Schema({
