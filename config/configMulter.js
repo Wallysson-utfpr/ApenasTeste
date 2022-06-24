@@ -1,4 +1,5 @@
 // midleware para upload das imagens
+// esse midleware é para conexão local
 
 const multer = require('multer');
 
