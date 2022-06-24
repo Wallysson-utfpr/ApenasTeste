@@ -4,10 +4,12 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 var LoginSchema = conexao.Schema({
+    // validação do email
     email : {
         type: String,
         required: [true, 'E-mail é obrigatorio']
     },
+    // validação da senha
     password : {
         type: String,
         required: [true, 'senha é obrigatoria'],
