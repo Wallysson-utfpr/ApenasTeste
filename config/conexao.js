@@ -1,4 +1,5 @@
 // conexão com o banco de dados
+// este bloco é para conexão local
 
 const mongoose = require('mongoose');
 const uri = "mongodb://localhost:27017/dadosapi";
