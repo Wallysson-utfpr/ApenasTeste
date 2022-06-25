@@ -13,6 +13,7 @@ var path = require('path');
 var Moeda = require('./model/moeda');
 var Login = require('./model/login');
 var upload = require('./config/configMulter');
+const { emitWarning } = require('process');
 
 app.use(cookieParser());
 
@@ -81,7 +82,9 @@ app.post('/authenticate', async (req, res) => {
 
     } catch (error) {
         if (error) {
+            emitWarning("senha incorreta");
             return res.redirect('/?=SenhaIncorreta')
+
         }
     }
 

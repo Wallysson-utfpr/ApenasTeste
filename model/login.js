@@ -9,6 +9,7 @@ var LoginSchema = conexao.Schema({
         type: String,
         required: [true, 'E-mail é obrigatorio']
     },
+    
     // validação da senha
     password : {
         type: String,
