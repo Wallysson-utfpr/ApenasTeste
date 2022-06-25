@@ -4,6 +4,7 @@ require('./environment')
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
+
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
@@ -68,6 +69,7 @@ app.post('/authenticate', async (req, res) => {
 
         return res.redirect('/add')
 
+        /* JRMS - Verificar
         if (accessToken) return res.status(200).json({
             ok: true,
             message: 'Is Authenticated',
@@ -75,6 +77,7 @@ app.post('/authenticate', async (req, res) => {
             token: accessToken
 
         })
+        */
 
     } catch (error) {
         if (error) {
