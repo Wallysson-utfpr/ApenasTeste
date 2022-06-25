@@ -82,7 +82,7 @@ app.post('/authenticate', async (req, res) => {
 
     } catch (error) {
         if (error) {
-            emitWarning("senha incorreta");
+            alert("senha incorreta");
             return res.redirect('/?=SenhaIncorreta')
 
         }
