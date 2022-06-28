@@ -162,6 +162,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
         alta: req.body.txtAlta,
         baixa: req.body.txtBaixa,
         foto: req.file.filename
+        
     })
     money.save(function (err) {
         if (err) {
