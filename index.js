@@ -182,6 +182,9 @@ app.get('/consulta', function (req, res) {
 })
 
 
+app.get('/userExist', function (req, res) {
+    res.render('userExist.ejs');
+})
 
 app.post('/add', upload.single("txtFoto"), function (req, res) {
     var money = new Moeda({
