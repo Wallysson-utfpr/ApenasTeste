@@ -94,7 +94,7 @@ app.get('/add', function (req, res) {
 })
 
 app.get('/wrong_passw', function (req, res) {
-    res.render('index.ejs');
+    res.render('wrong_passw.ejs');
 })
 
 
