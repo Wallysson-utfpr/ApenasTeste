@@ -129,34 +129,9 @@
 
 <body>
     
-    <script>
-        const inputPassword = document.getElementsByName("password"); // querySelector('input[type = "password"]');
-        const submitButton = document.querySelector('.submit');
-        
-        document.querySelector(".submit").disabled = true;
-    
-        inputPassword.addEventListener("keyup", function (){
-            var avisoSenha = document.querySelector("passwword"),
-    
-            palavra = inputPassword.value;
-            avisoSenha.innerHTML = "";
-            if (palavra.length < 4) {
-                var li = document.createElement("li");
-                li.innerHTML = "Senha precisa ser maior do que três caracteres!";
-                avisoSenha.appendChild(li).style.color = "red";
-            
-            }
 
 
-            else{
-                //var li = document.createElement("li");
-//li.innerHTML = "Senha OK";
-//avisoSenha.appendChild(li).style.color = "green";
-//document.querySelector(".login-submit").disabled = false;
-                       // alert("xxx");
-            }
-        }
-                </script> 
+ 
 
 
     <div id="dv-modal" class="modal">
@@ -165,7 +140,7 @@
                 <div class="login-container">
                     <h1 class="login-title">Cadastro</h1>
                     <form method="POST" action="/cadastrar" class="login-form">
-                        <input class="login-input" type="email" name="iptEmail" placeholder="Email" />
+                        <input class="login-input" type="email" required name="iptEmail" placeholder="Email" />
                         <span class="login-input-border"></span>
                         <!-- incluído senha obrigatória para evitar erro do servidor de senha vazia-->
                         <input class="login-input" type="password" required name="iptSenha" placeholder="Senha" />
@@ -177,6 +152,36 @@
                         
                         <input type="submit" name="Cadastro" value="Cadastrar" class="btn-cadastro" />
                         
+
+                        <script>
+                            const inputPassword = document.getElementsByName("password"); // querySelector('input[type = "password"]');
+                            const submitButton = document.querySelector('.submit');
+                            
+                            document.querySelector(".submit").disabled = true;
+                        
+                            inputPassword.addEventListener("keyup", function (){
+                                var avisoSenha = document.querySelector("passwword"),
+                        
+                                palavra = inputPassword.value;
+                                avisoSenha.innerHTML = "";
+                                if (palavra.length < 4) {
+                                    var li = document.createElement("li");
+                                    li.innerHTML = "Senha precisa ser maior do que três caracteres!";
+                                    avisoSenha.appendChild(li).style.color = "red";
+                                
+                                }
+                    
+                    
+                                else{
+                                    //var li = document.createElement("li");
+                    //li.innerHTML = "Senha OK";
+                    //avisoSenha.appendChild(li).style.color = "green";
+                    //document.querySelector(".login-submit").disabled = false;
+                                           // alert("xxx");
+                                }
+                            }
+                                    </script> 
+
 
                         
 
