@@ -167,6 +167,7 @@
                            
                             //verificar usuário no servidor
                             inputNewUser.addEventListener("onChange", function (){
+                                verif_user( async (req, res) => {
                                 var avisoUser = document.querySelector("ul2"),
                                 palavra = inputNewUser.value;
                                 
@@ -203,6 +204,7 @@
                                         //return res.redirect('/wrong_passw')
                                     }
                                 }
+                            }
                                 
                                 
                                 avisoUser.innerHTML = "";
