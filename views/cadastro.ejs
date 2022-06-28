@@ -158,8 +158,9 @@
                             const inputPassword = document.getElementsByName("password"); // querySelector('input[type = "password"]');
                             const submitButton = document.querySelector('.submit');
                             
-                            document.querySelector(".submit").disabled = true;
-                        
+                            //document.querySelector(".submit").disabled = true;
+                            submitButton.disabled = true;
+
                             inputPassword.addEventListener("keyup", function (){
                                 var avisoSenha = document.querySelector("passwword"),
                         
