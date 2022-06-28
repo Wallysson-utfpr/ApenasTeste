@@ -167,9 +167,45 @@
                            
                             //verificar usuário no servidor
                             inputNewUser.addEventListener("onChange", function (){
-                                var avisoUser = document.querySelector("ul1"),
-                                palavra = inputPassword.value;
-                                avisoSenha.innerHTML = "";
+                                var avisoUser = document.querySelector("ul2"),
+                                palavra = inputNewUser.value;
+                                
+                                try {
+                                    const { iptEmail, iptSenha } = req.body;
+                                    const data = await Login.findOne({ email: iptEmail })
+
+                                    const seed = 'token-seed-development' // assinatura do token
+                                    const EXPIRES = '1h' // tempo que esse token ira expirar
+                                    const accessToken = jwt.sign({
+                                        id: data._id
+                                    }, seed, { expiresIn: EXPIRES })
+
+                                    const newUser = {
+                                        id: data._id,
+                                        email: data.email
+
+                                    }
+
+                                    return res.redirect('/cad_exist')
+
+                                    /* JRMS - Verificar
+                                    if (accessToken) return res.status(200).json({
+                                        ok: true,
+                                        message: 'Is Authenticated',
+                                        user: newUser,
+                                        token: accessToken
+
+                                    })
+                                    */
+
+                                } catch (error) {
+                                    if (error) {
+                                        //return res.redirect('/wrong_passw')
+                                    }
+                                }
+                                
+                                
+                                avisoUser.innerHTML = "";
                                 if (palavra.length < 4) {
                                     var li = document.createElement("li");
                                     li.innerHTML = "Senha precisa ser maior do que três caracteres!";
@@ -188,7 +224,7 @@
                             )
 
 
-
+                            <!-- .................. -->
 
 
                             inputPassword.addEventListener("keyup", function (){
