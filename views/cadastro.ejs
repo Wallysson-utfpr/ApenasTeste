@@ -140,14 +140,21 @@
                         <input class="login-input" type="password" name="iptSenha" placeholder="Senha" />
                         <span class="login-input-border"></span>
                         <script>
-                            
-                            /* <form method="POST">
-                        
-                            
-                           
+                            palavra = inptSenha.value;
+                            avisoSenha.innerHTML = "";
+                            if (palavra.length < 4) {
+                             var li = document.createElement("li");
+                             li.innerHTML = "Senha precisa ser maior do que três caracteres!";
+                            avisoSenha.appendChild(li).style.color = "red";
+                             }
+                            else{
+                             var li = document.createElement("li");
+                             li.innerHTML = "Senha OK";
+                             avisoSenha.appendChild(li).style.color = "green";
+                            //document.querySelector(".login-submit").disabled = false;
                             
                             <input type="submit" name="Cadastro" value="Cadastrar" class="btn-cadastro" />
-                        */
+                        
                         </script>
                         
                             </form> 
