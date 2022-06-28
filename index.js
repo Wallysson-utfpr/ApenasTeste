@@ -9,8 +9,8 @@ const app = express();
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
-app.use(cookieParser());
-//var cookieParser = require('cookie-parser');
+//app.use(cookieParser());
+var cookieParser = require('cookie-parser');
 var path = require('path');
 var Moeda = require('./model/moeda');
 var Login = require('./model/login');
@@ -28,9 +28,9 @@ app.set("view engine", "ejs");
 
 
 app.get('/', function (req, res) {
-    if(req.cookies && req.cookies.login){
-        res.render('cad_moeda.ejs');
-    }
+    //if(req.cookies && req.cookies.login){
+    //    res.render('cad_moeda.ejs');
+    //}
     res.render('login.ejs')
     //res.redirect('/');
 })
