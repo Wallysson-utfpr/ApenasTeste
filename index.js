@@ -4,26 +4,24 @@ require('./environment')
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
-
+const { emitWarning } = require('process');
+const login = require('./model/login');
 
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
+
 var bodyParser = require('body-parser');
-//app.use(cookieParser());
 var cookieParser = require('cookie-parser');
 var path = require('path');
 var Moeda = require('./model/moeda');
 var Login = require('./model/login');
 var upload = require('./config/configMulter');
-const { emitWarning } = require('process');
-const login = require('./model/login');
 
 app.use(cookieParser());
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(express.static(path.join(__dirname, "public")));
+
 
 app.set("view engine", "ejs");
 
@@ -31,6 +29,7 @@ app.set("view engine", "ejs");
 app.get('/', function (req, res) {
     res.render('login.ejs')
 })
+
 
 app.get('/cadastrar', function (req, res) {
     res.render('cad_user.ejs');
@@ -59,6 +58,8 @@ app.post('/cadastrar', function (req, res) {
 })
 */
 
+
+// Segunda versão da função para cadastro de usuário - verifica se o email já está cadastrado.
 app.post('/cadastrar', async (req, res) => {
 
     try {
@@ -79,25 +80,12 @@ app.post('/cadastrar', async (req, res) => {
 
         return res.redirect('/userExist')
 
-        /*JRMS - Verificar
-        if (accessToken) return res.status(200).json({
-            ok: true,
-            message: 'Is Authenticated',
-            user: newUser,
-            token: accessToken
-
-        })
-        */
-
     } catch (error) {
         if (error) {
             var login = new Login({
                 email: req.body.iptEmail,
                 password: req.body.iptSenha
             })
-        
-        
-        
         
             login.save(function (err) {
                 if (err) {
@@ -106,24 +94,9 @@ app.post('/cadastrar', async (req, res) => {
                     res.redirect('/');
                 }
             })
-            
-            
-            //return res.redirect('/wrong_passw')
         }
     }
-
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 // autenticação do usuário no servidor - comparando os dados informados
@@ -162,8 +135,8 @@ app.post('/authenticate', async (req, res) => {
             return res.redirect('/wrong_passw')
         }
     }
-
 })
+
 
 app.get('/add', function (req, res) {
     res.render('cad_moeda.ejs');
