@@ -171,7 +171,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
             res.redirect('/add');
         }
     })
-    //fotos.push(req.file.filename)
+    fotos.push(req.file.filename);
     res.redirect('/add');
 
 })
