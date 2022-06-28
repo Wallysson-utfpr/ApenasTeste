@@ -82,8 +82,8 @@ app.post('/authenticate', async (req, res) => {
 
     } catch (error) {
         if (error) {
-            return res.redirect('/?=SenhaIncorreta')
-
+            //return res.redirect('/?=SenhaIncorreta')
+            return res.redirect('/wrong_passw')
         }
     }
 
@@ -92,6 +92,15 @@ app.post('/authenticate', async (req, res) => {
 app.get('/add', function (req, res) {
     res.render('index.ejs');
 })
+
+app.get('/wrong_passw', function (req, res) {
+    res.render('index.ejs');
+})
+
+
+
+
+
 
 app.post('/add', upload.single("txtFoto"), function (req, res) {
     var money = new Moeda({
