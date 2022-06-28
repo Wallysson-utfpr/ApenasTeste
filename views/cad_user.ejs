@@ -159,76 +159,10 @@
                         <!-- scrip para orientar tamanho mínimo da senha -->
                         <script>
                             const inputPassword = document.querySelector('input[type = "password"]');
-                            const inputNewUser = document.querySelector('input[type = "email"]');
                             const submitButton = document.querySelector('.btn-cadastro');
                             
                             document.querySelector(".btn-cadastro").disabled = true;
                            
-                           
-                            //verificar usuário no servidor
-                            inputNewUser.addEventListener("onChange", function (){
-                                verif_user( async (req, res) => {
-                                var avisoUser = document.querySelector("ul2"),
-                                palavra = inputNewUser.value;
-                                
-                                try {
-                                    const { iptEmail} = req.body;
-                                    const data = await Login.findOne({ email: iptEmail })
-
-                                    const seed = 'token-seed-development' // assinatura do token
-                                    const EXPIRES = '1h' // tempo que esse token ira expirar
-                                    const accessToken = jwt.sign({
-                                        id: data._id
-                                    }, seed, { expiresIn: EXPIRES })
-
-                                    const newUser = {
-                                        id: data._id,
-                                        email: data.email
-
-                                    }
-
-                                    return res.redirect('/cad_exist')
-
-                                    /* JRMS - Verificar
-                                    if (accessToken) return res.status(200).json({
-                                        ok: true,
-                                        message: 'Is Authenticated',
-                                        user: newUser,
-                                        token: accessToken
-
-                                    })
-                                    */
-
-                                } catch (error) {
-                                    if (error) {
-                                        //return res.redirect('/wrong_passw')
-                                    }
-                                }
-                                })
-                                
-                                
-                                avisoUser.innerHTML = "";
-                                if (palavra.length < 4) {
-                                    var li = document.createElement("li");
-                                    li.innerHTML = "Senha precisa ser maior do que três caracteres!";
-                                    avisoSenha.appendChild(li).style.color = "red";
-                                
-                                }
-                    
-                                else{
-                                  var li = document.createElement("li");
-                                    li.innerHTML = "Senha OK";
-                                    avisoSenha.appendChild(li).style.color = "green";
-                                    document.querySelector(".btn-cadastro").disabled = false;
-                                    //<input.innerHTML type="submit" name="Cadastro" value="Cadastrar" class="btn-cadastro" />
-                                }
-                            }
-                            )
-
-
-                            <!-- .................. -->
-
-
                             inputPassword.addEventListener("keyup", function (){
                                 var avisoSenha = document.querySelector("ul1"),
                                 palavra = inputPassword.value;
