@@ -171,6 +171,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
             res.redirect('/add');
         }
     })
+    fotos.push(req.file.filename)
 })
 
 let port = process.env.PORT || 3000;
