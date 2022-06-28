@@ -35,12 +35,15 @@ app.get('/cadastrar', function (req, res) {
 
 app.post('/cadastrar', function (req, res) {
 
-    console.log('requestttttt#####', req.body)
+    //console.log('requestttttt#####', req.body)
     var login = new Login({
         email: req.body.iptEmail,
         password: req.body.iptSenha
     })
 
+
+
+    
     login.save(function (err) {
         if (err) {
             console.log(err);
