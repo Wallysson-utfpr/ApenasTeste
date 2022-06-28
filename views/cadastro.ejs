@@ -129,6 +129,36 @@
 
 <body>
     
+    <script>
+        const inputPassword = document.getElementsByName("password"); // querySelector('input[type = "password"]');
+        const submitButton = document.querySelector('.submit');
+        
+        document.querySelector(".submit").disabled = true;
+    
+        inputPassword.addEventListener("keyup", function (){
+            var avisoSenha = document.querySelector("passwword"),
+    
+            palavra = inputPassword.value;
+            avisoSenha.innerHTML = "";
+            if (palavra.length < 4) {
+                var li = document.createElement("li");
+                li.innerHTML = "Senha precisa ser maior do que três caracteres!";
+                avisoSenha.appendChild(li).style.color = "red";
+            
+            }
+
+
+            else{
+                //var li = document.createElement("li");
+//li.innerHTML = "Senha OK";
+//avisoSenha.appendChild(li).style.color = "green";
+//document.querySelector(".login-submit").disabled = false;
+                       // alert("xxx");
+            }
+        }
+                </script> 
+
+
     <div id="dv-modal" class="modal">
         <div class="modal-content">
             <main class="login">
@@ -143,41 +173,12 @@
                         <ul>
 
                         </ul>
-                        document.querySelector(".submit").disabled = true;
+                        
                         
                         <input type="submit" name="Cadastro" value="Cadastrar" class="btn-cadastro" />
-                        document.querySelector(".submit").disabled = true;
-
-                        <script>
-                        const inputPassword = document.getElementsByName("password"); // querySelector('input[type = "password"]');
-                        const submitButton = document.querySelector('.submit');
                         
-                        document.querySelector(".submit").disabled = true;
-                    
-                        inputPassword.addEventListener("keyup", function (){
-                            var avisoSenha = document.querySelector("passwword"),
-                    
-                            palavra = inputPassword.value;
-                            avisoSenha.innerHTML = "";
-                            if (palavra.length < 4) {
-                                var li = document.createElement("li");
-                                li.innerHTML = "Senha precisa ser maior do que três caracteres!";
-                                avisoSenha.appendChild(li).style.color = "red";
-                            
-                            }
 
-
-                            else{
-                                //var li = document.createElement("li");
-            //li.innerHTML = "Senha OK";
-           //avisoSenha.appendChild(li).style.color = "green";
-            //document.querySelector(".login-submit").disabled = false;
-                                       // alert("xxx");
-                            }
-                        }
-                                </script> 
-
-
+                        
 
 
                     </form> 
