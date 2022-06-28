@@ -140,9 +140,10 @@
                 <div class="login-container">
                     <h1 class="login-title">Cadastro</h1>
                     <form method="POST" action="/cadastrar" class="login-form">
+                        <!-- incluído e-mail obrigatório para evitar erro do servidor de campo vazio -->
                         <input class="login-input" type="email" required name="iptEmail" placeholder="Email" />
                         <span class="login-input-border"></span>
-                        <!-- incluído senha obrigatória para evitar erro do servidor de senha vazia-->
+                        <!-- incluído senha obrigatória para evitar erro do servidor de senha vazia -->
                         <input class="login-input" type="password" required name="iptSenha" placeholder="Senha" />
                         <span class="login-input-border"></span>
                         <ul>
@@ -178,8 +179,8 @@
                     //avisoSenha.appendChild(li).style.color = "green";
                     //document.querySelector(".login-submit").disabled = false;
                                            // alert("xxx");
-                                }
-                            }
+                                    }
+                            })
                                     </script> 
 
 
