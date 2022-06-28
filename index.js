@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/cadastrar', function (req, res) {
-    res.render('cadastro.ejs');
+    res.render('cad_user.ejs');
 })
 
 app.post('/cadastrar', function (req, res) {
