@@ -1,6 +1,6 @@
 // 
 // 
-require('./environment')
+var require('./environment')
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
@@ -29,18 +29,15 @@ app.set("view engine", "ejs");
 
 
 app.get('/', function (req, res) {
-    //if(req.cookies && req.cookies.login){
-    //    res.render('cad_moeda.ejs');
-    //}
     res.render('login.ejs')
-    //res.redirect('/');
 })
 
 app.get('/cadastrar', function (req, res) {
     res.render('cad_user.ejs');
 })
 
-/*
+
+/* Primeira função para cadastro de usuário - não verifica se o email já está cadastrado.
 app.post('/cadastrar', function (req, res) {
 
     //console.log('requestttttt#####', req.body)
