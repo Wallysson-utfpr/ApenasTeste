@@ -155,7 +155,7 @@
                             const inputPassword = document.querySelector('input[type = "password"]');
                             const submitButton = document.querySelector('.btn-cadastro');
                             
-                            //document.querySelector(".btn-cadastro").disabled = true;
+                            document.querySelector(".btn-cadastro").disabled = true;
                            
                             inputPassword.addEventListener("keyup", function (){
                                 var avisoSenha = document.querySelector("ul1"),
@@ -172,7 +172,7 @@
                                   var li = document.createElement("li");
                                     li.innerHTML = "Senha OK";
                                     avisoSenha.appendChild(li).style.color = "green";
-                                    //document.querySelector(".btn-cadastro").disabled = false;
+                                    document.querySelector(".btn-cadastro").disabled = false;
                                     //<input.innerHTML type="submit" name="Cadastro" value="Cadastrar" class="btn-cadastro" />
                                 }
                             }
