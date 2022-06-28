@@ -141,13 +141,13 @@
                         <span class="login-input-border"></span>
                         
                         <script>
-                            input.login-input.inptSenha.addEventListener("keyup", function (){
+                            input.login-input.iptSenha.addEventListener("keyup", function (){
                             var avisoSenha = document.querySelector("iptSenha"),
                             palavra = inptSenha.value;
                             avisoSenha.innerHTML = "";
                             if (palavra.length < 4) {
                              var li = document.createElement("li");
-                             li.innerHTML = "Senha precisa ser maior do que três caracteres!";
+                              li.innerHTML = "Senha precisa ser maior do que três caracteres!";
                             avisoSenha.appendChild(li).style.color = "red";
                              }
                             else{
