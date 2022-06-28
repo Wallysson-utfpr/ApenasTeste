@@ -49,7 +49,7 @@ app.post('/cadastrar', function (req, res) {
     })
 })
 
-
+// autenticação do usuário no servidor - comparando os dados informados
 app.post('/authenticate', async (req, res) => {
 
     try {
