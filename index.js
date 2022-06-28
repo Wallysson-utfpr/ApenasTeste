@@ -99,7 +99,9 @@ app.get('/wrong_passw', function (req, res) {
 })
 
 
-
+app.get('/consulta', function (req, res) {
+    res.render('cons_moeda.ejs');
+})
 
 
 
