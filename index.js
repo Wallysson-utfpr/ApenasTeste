@@ -40,6 +40,7 @@ app.get('/cadastrar', function (req, res) {
     res.render('cad_user.ejs');
 })
 
+/*
 app.post('/cadastrar', function (req, res) {
 
     //console.log('requestttttt#####', req.body)
@@ -59,6 +60,73 @@ app.post('/cadastrar', function (req, res) {
         }
     })
 })
+*/
+
+app.post('/cadastrar', async (req, res) => {
+
+    try {
+        const { iptEmail } = req.body;
+        const data = await Login.findOne({ email: iptEmail})
+
+        const seed = 'token-seed-development' // assinatura do token
+        const EXPIRES = '1h' // tempo que esse token ira expirar
+        const accessToken = jwt.sign({
+            id: data._id
+        }, seed, { expiresIn: EXPIRES })
+
+        const newUser = {
+            id: data._id,
+            email: data.email
+
+        }
+
+        return res.redirect('/userExist')
+
+        /*JRMS - Verificar
+        if (accessToken) return res.status(200).json({
+            ok: true,
+            message: 'Is Authenticated',
+            user: newUser,
+            token: accessToken
+
+        })
+        */
+
+    } catch (error) {
+        if (error) {
+            var login = new Login({
+                email: req.body.iptEmail,
+                password: req.body.iptSenha
+            })
+        
+        
+        
+        
+            login.save(function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.redirect('/');
+                }
+            })
+            
+            
+            //return res.redirect('/wrong_passw')
+        }
+    }
+
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 // autenticação do usuário no servidor - comparando os dados informados
