@@ -16,6 +16,7 @@ var Moeda = require('./model/moeda');
 var Login = require('./model/login');
 var upload = require('./config/configMulter');
 const { emitWarning } = require('process');
+const login = require('./model/login');
 
 app.use(cookieParser());
 
@@ -81,7 +82,7 @@ app.post('/authenticate', async (req, res) => {
 
         return res.redirect('/add')
 
-        //JRMS - Verificar
+        /*JRMS - Verificar
         if (accessToken) return res.status(200).json({
             ok: true,
             message: 'Is Authenticated',
@@ -89,7 +90,7 @@ app.post('/authenticate', async (req, res) => {
             token: accessToken
 
         })
-        //*/
+        */
 
     } catch (error) {
         if (error) {
