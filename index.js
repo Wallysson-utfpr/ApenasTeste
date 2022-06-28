@@ -5,10 +5,12 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
 
+
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+//var cookieParser = require('cookie-parser');
 var path = require('path');
 var Moeda = require('./model/moeda');
 var Login = require('./model/login');
@@ -26,7 +28,11 @@ app.set("view engine", "ejs");
 
 
 app.get('/', function (req, res) {
-    res.render('login.ejs');
+    if(req.cookies && req.cookies.login){
+        res.render('cad_moeda.ejs');
+    }
+    res.render('login.ejs')
+    //res.redirect('/');
 })
 
 app.get('/cadastrar', function (req, res) {
@@ -43,7 +49,7 @@ app.post('/cadastrar', function (req, res) {
 
 
 
-    
+
     login.save(function (err) {
         if (err) {
             console.log(err);
@@ -75,7 +81,7 @@ app.post('/authenticate', async (req, res) => {
 
         return res.redirect('/add')
 
-        /* JRMS - Verificar
+        //JRMS - Verificar
         if (accessToken) return res.status(200).json({
             ok: true,
             message: 'Is Authenticated',
@@ -83,7 +89,7 @@ app.post('/authenticate', async (req, res) => {
             token: accessToken
 
         })
-        */
+        //*/
 
     } catch (error) {
         if (error) {
