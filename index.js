@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.set("view engine", "ejs");
 
+
 app.get('/', function (req, res) {
     res.render('login.ejs');
 })
@@ -48,6 +49,7 @@ app.post('/cadastrar', function (req, res) {
         }
     })
 })
+
 
 // autenticação do usuário no servidor - comparando os dados informados
 app.post('/authenticate', async (req, res) => {
@@ -82,7 +84,6 @@ app.post('/authenticate', async (req, res) => {
 
     } catch (error) {
         if (error) {
-            //return res.redirect('/?=SenhaIncorreta')
             return res.redirect('/wrong_passw')
         }
     }
@@ -90,7 +91,7 @@ app.post('/authenticate', async (req, res) => {
 })
 
 app.get('/add', function (req, res) {
-    res.render('index.ejs');
+    res.render('cad_moeda.ejs');
 })
 
 app.get('/wrong_passw', function (req, res) {
