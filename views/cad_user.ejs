@@ -172,7 +172,7 @@
                                 palavra = inputNewUser.value;
                                 
                                 try {
-                                    const { iptEmail, iptSenha } = req.body;
+                                    const { iptEmail} = req.body;
                                     const data = await Login.findOne({ email: iptEmail })
 
                                     const seed = 'token-seed-development' // assinatura do token
