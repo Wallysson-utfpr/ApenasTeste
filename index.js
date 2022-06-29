@@ -23,10 +23,11 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.set('view engine', 'hbs');
 
 
 app.set("view engine", "ejs");
-
+images = [];
 
 app.get('/', function (req, res) {
 
@@ -150,13 +151,15 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
         foto: req.file.filename
         
     })
+    
     money.save(function (err) {
         if (err) {
             console.log(err);
         } else {
             //money.push(req.file.filename);
-            images = [];
-            images.push(req.file.filename);
+            //images = [];
+            //images.push(req.file.filename);
+            //console.log(images);
             res.redirect('/add');
         }
     })

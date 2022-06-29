@@ -58,17 +58,30 @@
         border-color: black;
       }
 
-      logout {
-        border-radius: 10%;
-        border-width: 3px;
-        border-color: black;
+      .logoutlink a {
+        font-size: 14pt;
+        color: black;
+        text-align: center
+         
+        
+      }
+
+      .logoutlink {
+        font-size: 14pt;
+        color: black;
+        text-align: center
+         
+        
       }
 
 
 
+
+
       body {
-        /* background-color: rgb(47, 112, 112);*/
-        background-color: rgb(113, 177, 238);
+        /* background-color: rgb(47, 112, 112); */
+        /* background-color: rgb(113, 177, 238); */
+        background: linear-gradient(-90deg, white, gray, lightblue);
       }
 
       .foto {
@@ -109,16 +122,19 @@
       <input type="submit" name="Adicionar" value="Adicionar" class="btn btn-primary" /> <br><br>
     </form>
 
-    
+    <!--
     <ul>
-      {{#each money}}
+      <hbs>
+      {{#each images}}
           <li><img src="public/fotos/{{this}}"/></li>
-      {{/each}}
+          {{/each}}
       </ul>
-      
+    </hbs>
+    -->
       <br>
-      <a class = logout href="/logout">logout</a> <!-- limpa o cookie de sessão -->
-
+      <p class = "logoutlink">
+      <a href="/logout" >logout</a> <!-- limpa o cookie de sessão -->
+    </p>
   </body>
 
 </html>
