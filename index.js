@@ -2,10 +2,12 @@
 // 
 require('./environment')
 const jwt = require('jsonwebtoken');
+const Cookies = require('js-cookie');
 const express = require('express');
 const app = express();
 const { emitWarning } = require('process');
 const login = require('./model/login');
+const CookiesLogin = require('./middlewares/auth');
 
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
@@ -27,8 +29,18 @@ app.set("view engine", "ejs");
 
 
 app.get('/', function (req, res) {
-    res.render('login.ejs')
+
+    if (req.cookies.token) {
+        res.redirect('/add');
+    }else{
+        res.render('login.ejs')
+    }
 })
+
+app.get('/logout', function (req, res) {
+    res.clearCookie('token');
+    res.render('login.ejs')
+ })
 
 
 app.get('/cadastrar', function (req, res) {
@@ -66,16 +78,9 @@ app.post('/cadastrar', async (req, res) => {
         const { iptEmail } = req.body;
         const data = await Login.findOne({ email: iptEmail})
 
-        const seed = 'token-seed-development' // assinatura do token
-        const EXPIRES = '1h' // tempo que esse token ira expirar
-        const accessToken = jwt.sign({
-            id: data._id
-        }, seed, { expiresIn: EXPIRES })
-
         const newUser = {
             id: data._id,
             email: data.email
-
         }
 
         return res.redirect('/userExist')
@@ -101,45 +106,26 @@ app.post('/cadastrar', async (req, res) => {
 
 // autenticação do usuário no servidor - comparando os dados informados
 app.post('/authenticate', async (req, res) => {
-
-    try {
-        const { iptEmail, iptSenha } = req.body;
-        const data = await Login.findOne({ email: iptEmail, password: iptSenha })
-
-        const seed = 'token-seed-development' // assinatura do token
-        const EXPIRES = '1h' // tempo que esse token ira expirar
-        const accessToken = jwt.sign({
-            id: data._id
-        }, seed, { expiresIn: EXPIRES })
-
-        const newUser = {
-            id: data._id,
-            email: data.email
-
-        }
-
-        return res.redirect('/add')
-
-        /*JRMS - Verificar
-        if (accessToken) return res.status(200).json({
-            ok: true,
-            message: 'Is Authenticated',
-            user: newUser,
-            token: accessToken
-
-        })
-        */
-
-    } catch (error) {
-        if (error) {
-            return res.redirect('/wrong_passw')
-        }
+    const { iptEmail, iptSenha } = req.body;
+    const data = await Login.findOne({ email: iptEmail, password: iptSenha })    
+    if (data) {
+        const token = jwt.sign({ id: data._id }, 'secret', { expiresIn: '1h' });
+        res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
+        res.redirect('/add');
+    }else{
+        res.redirect('/wrong_passw');
     }
 })
 
 
+
 app.get('/add', function (req, res) {
-    res.render('cad_moeda.ejs');
+    if(req.cookies.token){
+        res.render('cad_moeda.ejs',{ 
+        });
+    }else { 
+        res.redirect('/');
+    }
 })
 
 app.get('/wrong_passw', function (req, res) {

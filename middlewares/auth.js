@@ -1,21 +1,23 @@
 // 
+const Cookies = require('js-cookie')
 
-const jwt = require('jsonwebtoken');
-const { promisify } = require('util');
-
-module.exports = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader) {
-    return res.status(401).send({ error: "No token provided" });
-  }
-  const [scheme, token] = authHeader.split(" ");
-
-  try {
-    const decoded = await promisify(jwt.verify)(token, "secret");
-    req.userId = decoded.id;
-    return next();
-  } catch (err) {
-    return res.status(401).send({ error: "Token invalid" });
-  }
-};
+const CookiesLogin = {
+  isLogged : () => {
+    const token = Cookies.get('token')
+    return token ? true : false
+  },
+  doLogin : (token, rememberPassword) => {
+    if(rememberPassword) {
+      Cookies.set('token', token, {expires: 999})
+    } else {
+      Cookies.set('token', 'token')
+    }
+  },
+   getToken : () => {
+    return Cookies.get('token')
+  },
+  doLogout: () => {
+    Cookies.remove('token')
+ }
+}
+module.exports = CookiesLogin
