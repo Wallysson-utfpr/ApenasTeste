@@ -169,7 +169,8 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
             console.log(err);
         } else {
             //money.push(req.file.filename);
-            foto.push(req.file.filename);
+            images = [];
+            images.push(req.file.filename);
             res.redirect('/add');
         }
     })
