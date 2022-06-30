@@ -125,11 +125,26 @@
 
     <ul>
     
-      {{#each images}}
+      <!-- {{#each images}} -->
           <!-- <li><img src="public/fotos/{{this}}"/></li> -->
-          <li><img src= "public/fotos/images[0]"/></li>
+        <!--  <li><img src= "public/fotos/images[0]"/></li>
           {{/each}}
-      </ul>
+      -->
+          
+        
+          
+            <% for(var i=0; i<images.length; i++) {%>
+               <li><%= images[i] %></li>
+                <li> <img src= "/fotos/<%=images[i]%>"/> </li>
+            <% } %>
+          
+            
+      
+
+
+
+
+        </ul>
     
     
       <br>
