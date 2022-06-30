@@ -140,7 +140,7 @@ app.get('/wrong_passw', function (req, res) {
 
 app.get('/consulta', function (req, res) {
     
-    res.redirect('cons_moeda.ejs');
+    res.render('cons_moeda.ejs');
 })
 
 
