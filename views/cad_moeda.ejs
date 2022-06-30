@@ -96,8 +96,9 @@
     
     <ul>
       <br />
-      <li><a href="/consulta" class="btn btn-success">Listar Moedas</a></li>
+        <li><a href="/consulta" class="btn btn-success">Listar Moedas</a></li>
     </ul>
+    
     <br />
     
     <br>
@@ -127,32 +128,13 @@
       <input type="submit" name="Adicionar" value="Adicionar" class="btn btn-primary" /> <br><br>
     </form>
 
-
+    <!-- laço for para mostrar as imagens retornadas pelo vetor 'images'-->
     <ul>
+      <% for(var i=0; i<images.length; i++) {%>
+        <li><%= images[i] %></li>
+        <li> <img src = "/fotos/<%=images[i]%>"/> </li> <% } %>
+    </ul>
     
-      <!-- {{#each images}} -->
-          <!-- <li><img src="public/fotos/{{this}}"/></li> -->
-        <!--  <li><img src= "public/fotos/images[0]"/></li>
-          {{/each}}
-      -->
-          
-        
-          
-            <% for(var i=0; i<images.length; i++) {%>
-               <li><%= images[i] %></li>
-                <li> <img src= "/fotos/<%=images[i]%>"/> </li>
-            <% } %>
-          
-            
-      
-
-
-
-
-        </ul>
-    
-    
-     
   </body>
 
 </html>
