@@ -2,12 +2,13 @@
 // 
 require('./environment')
 const jwt = require('jsonwebtoken');
-const Cookies = require('js-cookie');
+//const Cookies = require('js-cookie');
 const express = require('express');
 const app = express();
 const { emitWarning } = require('process');
-const login = require('./model/login');
-const CookiesLogin = require('./middlewares/auth');
+//const login = require('./model/login');
+//const CookiesLogin = require('./middlewares/auth');
+
 
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
@@ -23,12 +24,13 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.set('view engine', 'hbs');
+// app.set('view engine', 'hbs');
 
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 let images = [];
+let databaseReg = [];
 
 app.get('/', function (req, res) {
 
@@ -137,7 +139,8 @@ app.get('/wrong_passw', function (req, res) {
 
 
 app.get('/consulta', function (req, res) {
-    res.render('cons_moeda.ejs');
+    
+    res.redirect('cons_moeda.ejs');
 })
 
 
@@ -158,16 +161,11 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            //money.push(req.file.filename);
-            //images = [];
             images.push(req.file.filename);
-            //console.log(images);
             res.redirect('/add');
         }
     })
-    //fotos.push(req.file.filename);
-    //res.redirect('/add');
-
+    
 })
 
 let port = process.env.PORT || 3000;
