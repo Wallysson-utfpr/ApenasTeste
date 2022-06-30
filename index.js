@@ -2,13 +2,13 @@
 // 
 require('./environment')
 const jwt = require('jsonwebtoken');
-//const Cookies = require('js-cookie');
 const express = require('express');
 const app = express();
-const { emitWarning } = require('process');
+
+//const { emitWarning } = require('process');
 //const login = require('./model/login');
 //const CookiesLogin = require('./middlewares/auth');
-
+//const Cookies = require('js-cookie');
 
 // a contante abaixo é utilizada para teste em bando de dados local
 //const porta = process.env.porta || 3000;
