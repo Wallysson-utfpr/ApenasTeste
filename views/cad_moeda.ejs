@@ -122,15 +122,16 @@
       <input type="submit" name="Adicionar" value="Adicionar" class="btn btn-primary" /> <br><br>
     </form>
 
-    <!--
+
     <ul>
-      <hbs>
+    
       {{#each images}}
-          <li><img src="public/fotos/{{this}}"/></li>
+          <!-- <li><img src="public/fotos/{{this}}"/></li> -->
+          <li><img src= "public/fotos/images[0]"/></li>
           {{/each}}
       </ul>
-    </hbs>
-    -->
+    
+    
       <br>
       <p class = "logoutlink">
       <a href="/logout" >Clique aqui para Logout</a> <!-- limpa o cookie de sessão -->

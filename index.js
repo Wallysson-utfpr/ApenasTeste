@@ -27,7 +27,7 @@ app.set('view engine', 'hbs');
 
 
 app.set("view engine", "ejs");
-images = [];
+let images = [];
 
 app.get('/', function (req, res) {
 
@@ -122,10 +122,11 @@ app.post('/authenticate', async (req, res) => {
 
 app.get('/add', function (req, res) {
     if(req.cookies.token){
-        res.render('cad_moeda.ejs',{ 
+        res.render('cad_moeda.ejs',{ images: images
         });
     }else { 
         res.redirect('/');
+        
     }
 })
 
@@ -158,7 +159,7 @@ app.post('/add', upload.single("txtFoto"), function (req, res) {
         } else {
             //money.push(req.file.filename);
             //images = [];
-            //images.push(req.file.filename);
+            images.push(req.file.filename);
             //console.log(images);
             res.redirect('/add');
         }
